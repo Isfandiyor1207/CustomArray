@@ -7,64 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomArrayServiceImpl implements CustomArrayService {
-    @Override
-    public void sortArrayUsingBubbleSort(CustomArray customArray) {
-        int n = customArray.getArray().length;
-        for (int i = 0; i < n - 1; i++)
-            for (int j = 0; j < n - i - 1; j++)
-                if (customArray.getArray()[j] > customArray.getArray()[j + 1]) {
-                    int temp = customArray.getArray()[j];
-                    customArray.getArray()[j] = customArray.getArray()[j + 1];
-                    customArray.getArray()[j + 1] = temp;
-                }
-    }
 
-    @Override
-    public void sortArrayUsingInsertionSort(CustomArray customArray) {
-        int n = customArray.getArray().length;
-        for (int i = 1; i < n; ++i) {
-            int key = customArray.getArray()[i];
-            int j = i - 1;
+    private final ArraySearchingImpl arraySearching;
 
-            while (j >= 0 && customArray.getArray()[j] > key) {
-                customArray.getArray()[j + 1] = customArray.getArray()[j];
-                j = j - 1;
-            }
-            customArray.getArray()[j + 1] = key;
-        }
-    }
-
-    @Override
-    public void sortArrayUsingSelectionSort(CustomArray customArray) {
-        int n = customArray.getArray().length;
-
-        for (int i = 0; i < n - 1; i++) {
-            int minIndex = i;
-            for (int j = i + 1; j < n; j++)
-                if (customArray.getArray()[j] < customArray.getArray()[minIndex])
-                    minIndex = j;
-
-            int temp = customArray.getArray()[minIndex];
-            customArray.getArray()[minIndex] = customArray.getArray()[i];
-            customArray.getArray()[i] = temp;
-        }
-    }
-
-    @Override
-    public int binarySearchRecursively(CustomArray customArray, int searchElement, int low, int high) {
-        int middle = low + ((high - low) / 2);
-
-        if (high < low) {
-            return -1;
-        }
-
-        if (searchElement == customArray.getArray()[middle]) {
-            return middle;
-        } else if (searchElement < customArray.getArray()[middle]) {
-            return binarySearchRecursively(customArray, searchElement, low, middle - 1);
-        } else {
-            return binarySearchRecursively(customArray, searchElement, middle + 1, high);
-        }
+    public CustomArrayServiceImpl(){
+        arraySearching=new ArraySearchingImpl();
     }
 
     @Override
@@ -74,7 +21,7 @@ public class CustomArrayServiceImpl implements CustomArrayService {
         List<Integer> fibonacciNumbers=new ArrayList<>();
 
         for (Integer integer : customArray.getArray()) {
-            if (binarySearchRecursively(customArray, integer, 0, customArray.getArray().length) >= 0) {
+            if (arraySearching.binarySearchRecursively(customArray, integer, 0, customArray.getArray().length) >= 0) {
                 fibonacciNumbers.add(integer);
             }
         }
