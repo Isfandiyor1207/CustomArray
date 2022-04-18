@@ -1,4 +1,4 @@
-package entity;
+package uz.epam.task.entity;
 
 import java.util.Arrays;
 import java.util.StringJoiner;

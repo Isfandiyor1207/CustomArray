@@ -1,6 +1,6 @@
-package service;
+package uz.epam.task.service;
 
-import entity.CustomArray;
+import uz.epam.task.entity.CustomArray;
 
 public interface FileService {
 

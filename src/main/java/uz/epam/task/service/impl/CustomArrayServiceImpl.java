@@ -1,7 +1,7 @@
-package service.impl;
+package uz.epam.task.service.impl;
 
-import entity.CustomArray;
-import service.CustomArrayService;
+import uz.epam.task.entity.CustomArray;
+import uz.epam.task.service.CustomArrayService;
 
 import java.util.ArrayList;
 import java.util.List;

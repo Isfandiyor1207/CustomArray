@@ -1,12 +1,11 @@
-package service.impl;
+package uz.epam.task.service.impl;
 
-import entity.CustomArray;
-import service.FileService;
-import util.Util;
+import uz.epam.task.entity.CustomArray;
+import uz.epam.task.service.FileService;
+import uz.epam.task.util.Util;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class FileServiceImpl implements FileService {
