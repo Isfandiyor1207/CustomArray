@@ -8,19 +8,15 @@ import java.util.List;
 
 public class CustomArrayServiceImpl implements CustomArrayService {
 
-    private final ArraySearchingImpl arraySearching;
-
-    public CustomArrayServiceImpl(){
-        arraySearching=new ArraySearchingImpl();
-    }
-
     @Override
     public List<Integer> findFibonacciNumbers(CustomArray customArray) {
-        List<Integer> list = generateFibonacciNumbers(maxElement(customArray));
 
-        List<Integer> fibonacciNumbers=new ArrayList<>();
+        ArraySearchingImpl arraySearching = new ArraySearchingImpl();
+        List<Integer> list = generateFibonacciNumbers(maxElement(customArray), minElement(customArray));
 
-        for (Integer integer : customArray.getArray()) {
+        List<Integer> fibonacciNumbers = new ArrayList<>();
+
+        for (Integer integer : list) {
             if (arraySearching.binarySearchRecursively(customArray, integer, 0, customArray.getArray().length) >= 0) {
                 fibonacciNumbers.add(integer);
             }
@@ -31,26 +27,26 @@ public class CustomArrayServiceImpl implements CustomArrayService {
 
     @Override
     public int maxElement(CustomArray customArray) {
-        int i;
-
         int max = customArray.getArray()[0];
 
-        for (i = 1; i < customArray.getArray().length; i++)
-            if (customArray.getArray()[i] > max)
+        for (int i = 1; i < customArray.getArray().length; i++) {
+            if (customArray.getArray()[i] > max) {
                 max = customArray.getArray()[i];
+            }
+        }
 
         return max;
     }
 
     @Override
     public int minElement(CustomArray customArray) {
-        int i;
-
         int min = customArray.getArray()[0];
 
-        for (i = 1; i < customArray.getArray().length; i++)
-            if (customArray.getArray()[i] < min)
+        for (int i = 1; i < customArray.getArray().length; i++) {
+            if (customArray.getArray()[i] < min) {
                 min = customArray.getArray()[i];
+            }
+        }
 
         return min;
     }
@@ -80,9 +76,9 @@ public class CustomArrayServiceImpl implements CustomArrayService {
         return count == 2;
     }
 
-    public List<Integer> generateFibonacciNumbers(int maximumNumber) {
+    public List<Integer> generateFibonacciNumbers(int maximumNumber, int minimumNumber) {
 
-        List<Integer> fibonacciNumbers=new ArrayList<>();
+        List<Integer> fibonacciNumbers = new ArrayList<>();
         fibonacciNumbers.add(0);
         int n1 = 0;
         int n2 = 1;
@@ -95,7 +91,15 @@ public class CustomArrayServiceImpl implements CustomArrayService {
             fibonacciNumbers.add(n3);
         }
 
-        return fibonacciNumbers;
+        List<Integer> fibonacciInInterval = new ArrayList<>();
+
+        fibonacciNumbers.forEach(number -> {
+                    if (number >= minimumNumber && number <= maximumNumber) {
+                        fibonacciInInterval.add(number);
+                    }
+                }
+        );
+        return fibonacciInInterval;
     }
 
 //    public List<Integer> findNumberNotRepeated(){
@@ -105,17 +109,17 @@ public class CustomArrayServiceImpl implements CustomArrayService {
 //        }
 //    }
 
-    public boolean checkNumberToRepeated(Integer integer){
-        String number=String.valueOf(integer);
-        String checkingString=number;
+    public boolean checkNumberToRepeated(Integer integer) {
+        String number = String.valueOf(integer);
+        String checkingString = number;
 
-        boolean check=true;
+        boolean check = true;
 
         for (int i = 0; i < number.length(); i++) {
-            if (checkingString.substring(i).contains(String.valueOf(number.charAt(i)))){
-                check=false;
+            if (checkingString.substring(i).contains(String.valueOf(number.charAt(i)))) {
+                check = false;
             } else {
-                checkingString=checkingString.substring(i);
+                checkingString = checkingString.substring(i);
             }
         }
         return check;

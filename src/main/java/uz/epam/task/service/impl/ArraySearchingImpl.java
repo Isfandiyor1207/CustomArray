@@ -6,18 +6,20 @@ import uz.epam.task.service.ArraySearching;
 public class ArraySearchingImpl implements ArraySearching {
     @Override
     public int binarySearchRecursively(CustomArray customArray, int searchElement, int low, int high) {
-        int middle = low + ((high - low) / 2);
 
-        if (high < low) {
-            return -1;
-        }
+        int index = Integer.MAX_VALUE;
 
-        if (searchElement == customArray.getArray()[middle]) {
-            return middle;
-        } else if (searchElement < customArray.getArray()[middle]) {
-            return binarySearchRecursively(customArray, searchElement, low, middle - 1);
-        } else {
-            return binarySearchRecursively(customArray, searchElement, middle + 1, high);
+        while (low <= high) {
+            int mid = low  + ((high - low) / 2);
+            if (customArray.getArray()[mid] < searchElement) {
+                low = mid + 1;
+            } else if (customArray.getArray()[mid] > searchElement) {
+                high = mid - 1;
+            } else if (customArray.getArray()[mid] == searchElement) {
+                index = mid;
+                break;
+            }
         }
+        return index;
     }
 }

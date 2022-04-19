@@ -1,37 +1,22 @@
 package uz.epam.task;
 
 import uz.epam.task.entity.CustomArray;
+import uz.epam.task.file.impl.DataWriterImpl;
+import uz.epam.task.file.impl.FileCreaterImpl;
 import uz.epam.task.service.impl.CustomArrayServiceImpl;
-import uz.epam.task.service.impl.FileServiceImpl;
-
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        FileServiceImpl fileService = new FileServiceImpl();
-        fileService.createFile();
-        fileService.writeToFile();
-        CustomArray customArray = fileService.readFromFile();
-
+        CustomArray customArray = new CustomArray();
         CustomArrayServiceImpl customArrayService = new CustomArrayServiceImpl();
 
-        customArrayService.sortArrayUsingBubbleSort(customArray);
-        System.out.println(customArray);
-        System.out.printf("Max element: %s\n", customArrayService.maxElement(customArray));
-        System.out.printf("Min element: %s\n", customArrayService.minElement(customArray));
+        FileCreaterImpl creater = new FileCreaterImpl();
 
-        Scanner scanner = new Scanner(System.in);
+        creater.createFile();
 
-        System.out.print("Input the number:\t");
-        int searchingElement = scanner.nextInt();
+        DataWriterImpl writer = new DataWriterImpl();
 
-        System.out.printf("Index of searching element: %s\n",
-        customArrayService.binarySearchRecursively(customArray, searchingElement, 0, customArray.getArray().length));
-        System.out.println(customArrayService.searchPrimeNumbers(customArray));
-        System.out.println(customArrayService.generateFibonacciNumbers(10));
-
-
-        System.out.println(customArrayService.findFibonacciNumbers(customArray));
+        writer.writeToFile(20);
 
     }
 
